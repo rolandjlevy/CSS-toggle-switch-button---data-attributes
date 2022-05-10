@@ -1,0 +1,113 @@
+:root {
+  --height-30px: 30px;
+  --height-40px: 40px;
+  --border: 2px;
+  --speed: 200ms;
+  --active-green: #33cc00;
+  --active-orange: #ff9900;
+  --static-grey: #ccc;
+}
+
+.btn-toggler {
+  position: relative;
+  display: inline-block;
+}
+
+/* Customise height */
+.btn-toggler[data-value~="40"] {
+  width: var(--height-40px);
+  height: calc(var(--height-40px)/2 + var(--border));
+}
+
+.btn-toggler[data-value~="30"] {
+  width: var(--height-30px);
+  height: calc(var(--height-30px)/2 + var(--border));
+}
+
+/* Hide native checkbox */
+.btn-toggler > input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Customise colours */
+.btn-toggler[data-value~="green"] > input:checked + .slider {
+  background-color: var(--active-green);
+}
+
+.btn-toggler[data-value~="green"] > input:focus + .slider {
+  box-shadow: 0 0 1px var(--active-green);
+}
+
+.btn-toggler[data-value~="orange"] > input:checked + .slider {
+  background-color: var(--active-orange);
+}
+
+.btn-toggler[data-value~="orange"] > input:focus + .slider {
+  box-shadow: 0 0 1px var(--active-orange);
+}
+
+/* Mousedown behaviour */
+.btn-toggler > input:active + .slider {
+  filter: brightness(90%);
+  top: 1px;
+  bottom: -1px;
+}
+
+/* Slider settings */
+.btn-toggler > .slider {
+  cursor: pointer;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-color: var(--static-grey);
+}
+
+/* Button checked animation */
+.btn-toggler[data-value~="40"] > input:checked + .slider:before {
+  -webkit-transform: translateX(calc(var(--height-40px)/2 - var(--border)));
+  transform: translateX(calc(var(--height-40px)/2 - var(--border)));
+}
+
+.btn-toggler[data-value~="30"] > input:checked + .slider:before {
+  -webkit-transform: translateX(calc(var(--height-30px)/2 - var(--border)));
+  transform: translateX(calc(var(--height-30px)/2 - var(--border)));
+}
+
+/* Button unchecked */
+.btn-toggler > .slider:before {
+  content: "";
+  left: var(--border);
+  bottom: var(--border);
+  background-color: white;
+}
+
+/* Customise height */
+.btn-toggler[data-value~="40"] > .slider:before {
+  height: calc(var(--height-40px)/2 - var(--border));
+  width: calc(var(--height-40px)/2 - var(--border));
+}
+
+.btn-toggler[data-value~="30"] > .slider:before {
+  height: calc(var(--height-30px)/2 - var(--border));
+  width: calc(var(--height-30px)/2 - var(--border));
+}
+
+/* Slider transition */
+.btn-toggler > .slider,
+.btn-toggler > .slider:before {
+  position: absolute;
+  -webkit-transition: var(--speed);
+  transition: var(--speed);
+}
+
+/* Make slider ends rounded */
+.btn-toggler > .slider.round:before {
+  border-radius: 50%;
+}
+
+.btn-toggler[data-value~="40"] > .slider.round {
+  border-radius: calc(var(--height-40px)/2 + var(--border));
+}
+
+.btn-toggler[data-value~="30"] > .slider.round {
+  border-radius: calc(var(--height-30px)/2 + var(--border));
+}
